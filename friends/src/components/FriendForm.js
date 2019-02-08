@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {updateFriend,friendsDisplay} from "./../actions"
+import {addFriend,friendsDisplay} from "./../actions"
 import {connect} from "react-redux";
-//import "./FriendForm.css"
+import "./FriendForm.css"
 
 
 class FriendForm extends React.Component{
@@ -29,12 +29,12 @@ class FriendForm extends React.Component{
         clickHandler=event=>{
             event.preventDefault();
             let friend = {
-                 id : Date.now(),
+
                  name : this.state.inputName,
                  age:this.state.inputAge,
-                email:this.state.inputemail
+                email:this.state.email
             }
-            this.props.updateFriend(friend);
+            this.props.addFriend(friend);
             this.setState({inputName:"",inputAge:"",email:""})
         }
 
@@ -46,23 +46,22 @@ class FriendForm extends React.Component{
          <div>
 
 
-             <form onSubmit ={this.submitHandler}className="form-body">
-                 <div className="each">
-                     <div className="left">Name</div>
+             <form className="form-body">
+
                      <input type="text" placeholder="Enter name" name="inputName" value={this.state.inputName}
                          onChange={this.changeHandler}className="group" />
-                 </div>
-                 <div className="each">
-                     <div className="left">Age</div>
+
+
                      <input type="text" placeholder="Enter Age" name="inputAge" value={this.state.inputAge}
                             onChange={this.changeHandler}className="group" />
-                 </div>
-                 <div className="each">
-                     <div className="left">email</div>
+
+
                      <input type="text" placeholder="Enter email" name="email" value={this.state.email}
                             onChange={this.changeHandler}className="group" />
-                 </div>
+
+
                  <button type="submit" onClick={this.clickHandler}className="form-btn"> Add New Friend</button>
+
 
          </form>
          </div>
@@ -75,6 +74,6 @@ class FriendForm extends React.Component{
 export default connect(
     null,
     {
-        updateFriend
+        addFriend
     }
 )(FriendForm);

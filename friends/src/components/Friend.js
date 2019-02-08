@@ -1,22 +1,48 @@
 import React from "react";
 import "./friend.css"
+import {connect} from "react-redux";
+import {deleteFriend} from "../actions";
 
-const Friend = props => {
-    return <div  className="myCard">
-        <div className="each">
-            <div className="left">Name</div>
-            <div className="update"> {props.friend.name}</div>
-        </div>
-        <div className="each">
-            <div className="left">Age</div>
-            <div className="update"> {props.friend.age}</div>
-        </div>
-        <div className="each">
-            <div className="left">Email</div>
-            <div className="update">{props.friend.email}></div>
+class Friend extends React.Component{
+    constructor(){
+     super();
+      this.state={
 
-        </div>
-    </div>
+
+
+      }
+}
+deleteFriend=()=>{
+
+        this.props.deleteFriend(this.props.friend.id)
 }
 
-export default Friend;
+    render() {
+
+
+        return <div className="myCard">
+            <button onClick={this.deleteFriend}>X</button>
+            <div className="each">
+                <div className="left">Name</div>
+                <div className="update"> {this.props.friend.name}</div>
+            </div>
+            <div className="each">
+                <div className="left">Age</div>
+                <div className="update"> {this.props.friend.age}</div>
+            </div>
+            <div className="each">
+                <div className="left">Email</div>
+                <div className="update">{this.props.friend.email}</div>
+
+            </div>
+
+        </div>
+    }
+}
+
+export default connect(
+    null,
+    {
+        deleteFriend
+    }
+)(Friend);

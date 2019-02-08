@@ -40,19 +40,23 @@ class FriendsView extends React.Component {
 
 function mapStateToProps(state) {
     console.log("State is", state);
-    // if (!state.updated) {
-    //    return {
-    //       friends: state.friendsReducer.friends,
-    //       fetching: state.friendsReducer.fetching
-    //    }
-    // } else {
-        return {
-            fetching: state.friendsReducer.fetching,
-            friends: state.friendsUpdateReducer.friends,
-            error:state.friendsReducer.error,
-            friendUpdated:state.friendsUpdateReducer.friendUpdated
+
+        if (state.friendsAddReducer.friendAdded) {
+            return {
+                fetching: state.friendsReducer.fetching,
+                friends: state.friendsAddReducer.friends,
+                error: state.friendsReducer.error,
+                friendAdded: state.friendsAddReducer.friendAdded
+            }
+        } else {
+            return {
+                fetching: state.friendsReducer.fetching,
+                friends: state.friendsReducer.friends,
+                error: state.friendsReducer.error,
+                friendAdded: state.friendsAddReducer.friendAdded
+            }
         }
-    // }
+
 }
 
 // our mapStateToProps needs to have two properties inherited from state

@@ -1,4 +1,4 @@
-import {FETCHING,SUCCESS,FAILURE, UPDATE_FAILURE, UPDATE_SUCCESS}from  "../actions";
+import {FETCHING,SUCCESS,FAILURE, ADD_SUCCESS, ADD_FAILURE,DELETE_SUCCESS,DELETE_FAILURE}from  "../actions";
 
 const initialState={
     fetching: false,
@@ -6,23 +6,22 @@ const initialState={
 
     friends: [],
     error: null,
-    friendUpdated : false
+    friendAdded : false,
+    friendDeleted:false
 }
 export const friendsReducer = (state=initialState,action) => {
     console.log("Action is " + action.type);
     switch (action.type) {
 
-        // Fill me in with the important reducers
-        // action types should be FETCHING, SUCCESS and FAILURE
-        // your switch statement should handle all of these cases.
+
         case FETCHING:
-            return {...state,fetching:true,friends:[],error:null, friendUpdated  : false}
+            return {...state,fetching:true,friends:[],error:null, friendAdded  : false}
 
         case SUCCESS:
-            return {...state,fetching:false,friends:action.payload,error:null, friendUpdated :false}
+            return {...state,fetching:false,friends:action.payload,error:null, friendAdded :false}
 
         case FAILURE:
-            return {...state,fetching:false,friends:[],error:action.payload, friendUpdated :false}
+            return {...state,fetching:false,friends:[],error:action.payload, friendAdded :false}
 
 
         default:
@@ -30,21 +29,20 @@ export const friendsReducer = (state=initialState,action) => {
     }
 };
 
-export const friendsUpdateReducer = (state=initialState,action) => {
-    console.log("friendsUpdateReducer Action is " + action.type);
+export const friendsAddReducer = (state=initialState,action) => {
+    console.log("friendsAddReducer Action is " + action.type);
     switch (action.type) {
+        case ADD_SUCCESS:
+            return {...state,fetching:false,friends:action.payload,error:null, friendAdded :true,}
 
-        // Fill me in with the important reducers
-        // action types should be FETCHING, SUCCESS and FAILURE
-        // your switch statement should handle all of these cases.
+        case ADD_FAILURE:
+            return {...state,fetching:false,friends:[],error:action.payload,friendAdded :false}
 
+        case DELETE_SUCCESS:
+            return {...state,fetching:false,friends:action.payload,error:null, friendAdded :true}
 
-        case UPDATE_SUCCESS:
-            return {...state,fetching:false,friends:action.payload,error:null, friendUpdated :true}
-
-        case UPDATE_FAILURE:
-            return {...state,fetching:false,friends:[],error:action.payload,friendUpdated :false}
-
+        case DELETE_FAILURE:
+            return {...state,fetching:false,friends:[],error:action.payload,friendAdded :false}
         default:
             return state;
     }
